@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Vendor:</strong>
+  <%= @venue_date.vendor_id %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @venue_date.date %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @venue_date.service_id %>
+</p>
+
+<%= link_to 'Edit', edit_venue_date_path(@venue_date) %> |
+<%= link_to 'Back', venue_dates_path %>

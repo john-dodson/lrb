@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Photographer:</strong>
+  <%= @photographer_date.photographer_id %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @photographer_date.date %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @photographer_date.service_id %>
+</p>
+
+<%= link_to 'Edit', edit_photographer_date_path(@photographer_date) %> |
+<%= link_to 'Back', photographer_dates_path %>

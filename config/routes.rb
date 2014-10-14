@@ -1,4 +1,30 @@
 Rails.application.routes.draw do
+  resources :vendor_types
+
+  resources :photographer_dates
+
+  resources :caterer_dates
+
+  resources :florist_dates
+
+  resources :venue_dates
+
+  resources :venue_to_vendors
+
+  resources :service_to_vendors
+
+  resources :vendors
+
+  resources :services
+
+  resources :photographers
+
+  resources :caterers
+
+  resources :florists
+
+  resources :venues
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

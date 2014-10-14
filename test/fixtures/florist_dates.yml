@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  florist_id: 1
+  date: 2014-10-14
+  service_id: 1
+
+two:
+  florist_id: 1
+  date: 2014-10-14
+  service_id: 1

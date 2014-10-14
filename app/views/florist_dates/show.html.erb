@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Florist:</strong>
+  <%= @florist_date.florist_id %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @florist_date.date %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @florist_date.service_id %>
+</p>
+
+<%= link_to 'Edit', edit_florist_date_path(@florist_date) %> |
+<%= link_to 'Back', florist_dates_path %>

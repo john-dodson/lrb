@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Caterer:</strong>
+  <%= @caterer_date.caterer_id %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @caterer_date.date %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @caterer_date.service_id %>
+</p>
+
+<%= link_to 'Edit', edit_caterer_date_path(@caterer_date) %> |
+<%= link_to 'Back', caterer_dates_path %>

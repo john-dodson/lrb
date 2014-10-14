@@ -1,0 +1,29 @@
+<%= form_for(@venue_to_vendor) do |f| %>
+  <% if @venue_to_vendor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@venue_to_vendor.errors.count, "error") %> prohibited this venue_to_vendor from being saved:</h2>
+
+      <ul>
+      <% @venue_to_vendor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :venue_id %><br>
+    <%= f.number_field :venue_id %>
+  </div>
+  <div class="field">
+    <%= f.label :vendor_id %><br>
+    <%= f.number_field :vendor_id %>
+  </div>
+  <div class="field">
+    <%= f.label :vendor_type_id %><br>
+    <%= f.number_field :vendor_type_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
