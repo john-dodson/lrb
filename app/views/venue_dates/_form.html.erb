@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :vendor_id %><br>
-    <%= f.number_field :vendor_id %>
+    <%= f.label :venue_id %><br>
+    <%= collection_select(:venue_date, :venue_id, Venue.all, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :date %><br>
@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :service_id %><br>
-    <%= f.number_field :service_id %>
+    <%= collection_select(:venue_date, :service_id, Service.all, :id, :service_type) %>
   </div>
   <div class="actions">
     <%= f.submit %>

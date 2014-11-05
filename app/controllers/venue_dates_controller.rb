@@ -24,6 +24,7 @@ class VenueDatesController < ApplicationController
   # POST /venue_dates
   # POST /venue_dates.json
   def create
+    puts venue_date_params
     @venue_date = VenueDate.new(venue_date_params)
 
     respond_to do |format|
@@ -69,6 +70,6 @@ class VenueDatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def venue_date_params
-      params.require(:venue_date).permit(:vendor_id, :date, :service_id)
+      params.require(:venue_date).permit(:venue_id, :date, :service_id)
     end
 end

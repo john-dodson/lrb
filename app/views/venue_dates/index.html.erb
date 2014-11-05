@@ -2,7 +2,7 @@
 <table>
   <thead>
     <tr>
-      <th>Vendor</th>
+      <th>Venue</th>
       <th>Date</th>
       <th>Service</th>
       <th colspan="3"></th>
@@ -12,9 +12,9 @@
   <tbody>
     <% @venue_dates.each do |venue_date| %>
       <tr>
-        <td><%= venue_date.vendor_id %></td>
+        <td><%= Venue.find(venue_date.venue_id).name %></td>
         <td><%= venue_date.date %></td>
-        <td><%= venue_date.service_id %></td>
+        <td><%= Service.find(venue_date.service_id).service_type %></td>
         <td><%= link_to 'Show', venue_date %></td>
         <td><%= link_to 'Edit', edit_venue_date_path(venue_date) %></td>
         <td><%= link_to 'Destroy', venue_date, method: :delete, data: { confirm: 'Are you sure?' } %></td>

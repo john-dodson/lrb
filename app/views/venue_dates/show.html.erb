@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Vendor:</strong>
-  <%= @venue_date.vendor_id %>
+  <strong>Venue:</strong>
+  <%= Venue.find(@venue_date.venue_id).name %>
 </p>
 
 <p>
@@ -12,7 +12,7 @@
 
 <p>
   <strong>Service:</strong>
-  <%= @venue_date.service_id %>
+  <%= Service.find(@venue_date.service_id).service_type %>
 </p>
 
 <%= link_to 'Edit', edit_venue_date_path(@venue_date) %> |
