@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+    vendor_types = VendorType.create([{ vendor_type: 'venue' }, { vendor_type: 'florist' }, { vendor_type: 'caterer' }, { vendor_type: 'photographer' }])
+    services = Service.create([{ service_type: 'Wedding' }, { service_type: 'Private Party' }, { service_type: 'Corporate Event' }])

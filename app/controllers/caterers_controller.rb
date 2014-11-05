@@ -24,7 +24,9 @@ class CaterersController < ApplicationController
   # POST /caterers
   # POST /caterers.json
   def create
-    @caterer = Caterer.new(caterer_params)
+    vendor_type = VendorType.find_by vendor_type: 'caterer'
+    vendor = Vendor.create( vendor_type: 'caterer', vendor_type_id: vendor_type.id)
+    @caterer = caterer.new(name: caterer_params[:name], vendor_id: vendor.id)
 
     respond_to do |format|
       if @caterer.save

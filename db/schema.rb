@@ -67,19 +67,19 @@ ActiveRecord::Schema.define(version: 20141014211454) do
   end
 
   create_table "services", force: true do |t|
-    t.string   "type"
+    t.string   "service_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "vendor_types", force: true do |t|
-    t.string   "type"
+    t.string   "vendor_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "vendors", force: true do |t|
-    t.string   "type"
+    t.string   "vendor_type"
     t.integer  "vendor_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"

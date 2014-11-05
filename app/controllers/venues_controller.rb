@@ -24,7 +24,9 @@ class VenuesController < ApplicationController
   # POST /venues
   # POST /venues.json
   def create
-    @venue = Venue.new(venue_params)
+    vendor_type = VendorType.find_by vendor_type: 'venue'
+    vendor = Vendor.create( vendor_type: 'venue', vendor_type_id: vendor_type.id)
+    @venue = Venue.new(name: venue_params[:name], vendor_id: vendor.id)
 
     respond_to do |format|
       if @venue.save
@@ -60,6 +62,7 @@ class VenuesController < ApplicationController
       format.json { head :no_content }
     end
   end
+    
 
   private
     # Use callbacks to share common setup or constraints between actions.

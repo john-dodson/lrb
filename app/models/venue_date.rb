@@ -1,4 +1,4 @@
 class VenueDate < ActiveRecord::Base
-  belongs_to :Vendue
+  belongs_to :Venue
   belongs_to :Service
 end

@@ -24,7 +24,9 @@ class FloristsController < ApplicationController
   # POST /florists
   # POST /florists.json
   def create
-    @florist = Florist.new(florist_params)
+    vendor_type = VendorType.find_by vendor_type: 'florist'
+    vendor = Vendor.create( vendor_type: 'florist', vendor_type_id: vendor_type.id)
+    @florist = florist.new(name: florist_params[:name], vendor_id: vendor.id)
 
     respond_to do |format|
       if @florist.save

@@ -24,7 +24,9 @@ class PhotographersController < ApplicationController
   # POST /photographers
   # POST /photographers.json
   def create
-    @photographer = Photographer.new(photographer_params)
+    vendor_type = VendorType.find_by vendor_type: 'photographer'
+    vendor = Vendor.create( vendor_type: 'photographer', vendor_type_id: vendor_type.id)
+    @photographer = photographer.new(name: photographer_params[:name], vendor_id: vendor.id)
 
     respond_to do |format|
       if @photographer.save

@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
-
+ruby '1.9.3', :engine => 'jruby', :engine_version => '1.7.16.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'puma'
 gem 'rails', '4.1.4'
 # Use jdbcsqlite3 as the database for Active Record
 gem 'activerecord-jdbcsqlite3-adapter'
@@ -15,6 +16,11 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyrhino'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'jquery-rest-rails'
+gem 'bootstrap-sass'
+gem 'js-rails'
+gem 'momentjs-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -23,6 +29,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',                              group: :doc
 # Use jdbc-mysql to connect to db
 gem 'jdbc-mysql'
+
+gem 'fullcalendar-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

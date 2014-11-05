@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'venue_dates/index'
+  root 'venue_dates#index'
   resources :vendor_types
 
   resources :photographer_dates
@@ -24,6 +26,7 @@ Rails.application.routes.draw do
   resources :florists
 
   resources :venues
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

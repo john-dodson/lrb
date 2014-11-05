@@ -69,6 +69,6 @@ class VendorTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vendor_type_params
-      params.require(:vendor_type).permit(:type)
+      params.require(:vendor_type).permit(:vendor_type)
     end
 end
