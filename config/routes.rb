@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'venue_dates/index'
-  root 'venue_dates#index'
+  get 'services/index'
+  root 'services#index'
   resources :vendor_types
 
   resources :photographer_dates

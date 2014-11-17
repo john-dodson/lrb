@@ -4,6 +4,9 @@
 $('.jflatTimeline').jflatTimeline({scroll : '2', width : '700px', scrollingTime : '300'});
 sfw = '';
 
+$(document).ready ->
+    sfw = $("#event_selection").stepFormWizard();
+
 $(window).load ->
     $(".sf-wizard fieldset").mCustomScrollbar({
       theme:"dark-3",
