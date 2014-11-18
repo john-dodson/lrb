@@ -1,10 +1,40 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
-
+  @all_id = Service.where("service_type = 'All'").first.id
   # GET /services
   # GET /services.json
   def index
-    @services = Service.all
+    @services = Service.where("service_type != 'ALL'")
+    @venues = getVenuesFromService(@services.first.id)
+    @vendor_dates = getDatesFromVendor(@venues.first.id, @services.first.id)
+    @florists = getVendorFromVenue(@venues.first.id, @services.first.id, @vendor_dates.first.id, "florists")
+    @caterers = getVendorFromVenue(@venues.first.id, @services.first.id, @vendor_dates.first.id, "caterers")
+    @photographers = getVendorFromVenue(@venues.first.id, @services.first.id, @vendor_dates.first.id, "photographers")
+  end
+
+  def update
+    @venues = getVenuesFromService(params[:service_id])
+    @vendor_dates = getDatesFromVendor(params[:vendor_id], params[:service_id])
+    @florists = getVendorFromVenue(params[:venue_id], parmas[:service_id], params[:vendor_date_id], "florists")
+    @caterers = getVendorFromVenue(params[:venue_id], parmas[:service_id], params[:vendor_date_id], "caterers")
+    @photographers = getVendorFromVenue(params[:venue_id], parmas[:service_id], params[:vendor_date_id], "photographers")
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def getVendorFromVenue(venue_id, service_id, vendor_date_id, vendor_type)
+    Florists.joins("JOIN venue_to_vendors ON venue_to_vendor.vendor_id = #{vendor_type}.vendor_id JOIN vendor_dates on vendor_dates.vendor_id = #{vendor_type}.vendor_id WHERE venue_to_vendor.venue_id = #{venue_id} AND (vendor_dates.service_id = #{service_id} OR vendor_dates.service_id = #{@all_id}) AND vendor_dates.id = #{vendor_date_id}") if vendor_type == "florists"
+    Caterers.joins("JOIN venue_to_vendors ON venue_to_vendor.vendor_id = #{vendor_type}.vendor_id JOIN vendor_dates on vendor_dates.vendor_id = #{vendor_type}.vendor_id WHERE venue_to_vendor.venue_id = #{venue_id} AND (vendor_dates.service_id = #{service_id} OR vendor_dates.service_id = #{@all_id}) AND vendor_dates.id = #{vendor_date_id}") if vendor_type == "caterers"
+    Photographers.joins("JOIN venue_to_vendors ON venue_to_vendor.vendor_id = #{vendor_type}.vendor_id JOIN vendor_dates on vendor_dates.vendor_id = #{vendor_type}.vendor_id WHERE venue_to_vendor.venue_id = #{venue_id} AND (vendor_dates.service_id = #{service_id} OR vendor_dates.service_id = #{@all_id}) AND vendor_dates.date = #{vendor_date_id}") if vendor_type == "Photographers"
+  end
+
+  def getDatesFromVendor(vendor_id, service_id)
+    return VendorDates.where("vendor_id = ? AND (service_id = ? OR service_id = ?)", vendor_id, service_id, @all_id)
+  end
+
+  def getVenuesFromService(service_id)
+    return Venue.joins("JOIN vendor_dates ON vendor_date.vendor_id = venues.vendor_id WHERE (vendor_dates.service_id = #{service_id} OR vendor_dates.service_id = #{@all_id})")
   end
 
   # GET /services/1
@@ -62,7 +92,7 @@ class ServicesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # Use callbacks to share common setup OR constraints between actions.
     def set_service
       @service = Service.find(params[:id])
     end

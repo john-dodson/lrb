@@ -13,25 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20141014211454) do
 
-  create_table "caterer_dates", force: true do |t|
-    t.integer  "caterer_id"
-    t.date     "date"
-    t.integer  "service_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "caterers", force: true do |t|
     t.string   "name"
     t.integer  "vendor_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "florist_dates", force: true do |t|
-    t.integer  "florist_id"
-    t.date     "date"
-    t.integer  "service_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -43,25 +27,9 @@ ActiveRecord::Schema.define(version: 20141014211454) do
     t.datetime "updated_at"
   end
 
-  create_table "photographer_dates", force: true do |t|
-    t.integer  "photographer_id"
-    t.date     "date"
-    t.integer  "service_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "photographers", force: true do |t|
     t.string   "name"
     t.integer  "vendor_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "service_to_vendors", force: true do |t|
-    t.integer  "service_id"
-    t.integer  "vendor_id"
-    t.integer  "vendorType_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -85,8 +53,8 @@ ActiveRecord::Schema.define(version: 20141014211454) do
     t.datetime "updated_at"
   end
 
-  create_table "venue_dates", force: true do |t|
-    t.integer  "venue_id"
+  create_table "vendor_dates", force: true do |t|
+    t.integer  "vendor_id"
     t.date     "date"
     t.integer  "service_id"
     t.datetime "created_at"
@@ -96,7 +64,7 @@ ActiveRecord::Schema.define(version: 20141014211454) do
   create_table "venue_to_vendors", force: true do |t|
     t.integer  "venue_id"
     t.integer  "vendor_id"
-    t.integer  "venue_type_id"
+    t.integer  "vendor_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

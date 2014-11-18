@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :florist_dates
 
-  resources :venue_dates
+  resources :vendor_dates
 
   resources :venue_to_vendors
 

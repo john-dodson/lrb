@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Venue:</strong>
+  <%= Venue.find(@vendor_date.vendor_id).name %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @vendor_date.date %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= Service.find(@vendor_date.service_id).service_type %>
+</p>
+
+<%= link_to 'Edit', edit_vendor_date_path(@vendor_date) %> |
+<%= link_to 'Back', vendor_dates_path %>
