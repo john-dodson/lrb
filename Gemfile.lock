@@ -53,6 +53,7 @@ GEM
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jdbc-mysql (5.1.27)
+    jdbc-postgres (9.3.1102)
     jdbc-sqlite3 (3.7.2.1)
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
@@ -143,6 +144,7 @@ DEPENDENCIES
   font-awesome-rails
   jbuilder (~> 2.0)
   jdbc-mysql
+  jdbc-postgres
   jquery-rails
   jquery-rest-rails
   jquery-ui-rails
