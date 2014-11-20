@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 20141014211454) do
   end
 
   create_table "vendors", force: true do |t|
-    t.string   "vendor_type"
     t.integer  "vendor_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -64,7 +63,6 @@ ActiveRecord::Schema.define(version: 20141014211454) do
   create_table "venue_to_vendors", force: true do |t|
     t.integer  "venue_id"
     t.integer  "vendor_id"
-    t.integer  "vendor_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

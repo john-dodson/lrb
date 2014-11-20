@@ -18,9 +18,10 @@ gem 'therubyrhino'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-rest-rails'
+gem 'twitter-bootstrap-rails'
 gem 'bootstrap-sass'
 gem 'js-rails'
-gem 'momentjs-rails'
+gem 'font-awesome-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -29,8 +30,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',                              group: :doc
 # Use jdbc-mysql to connect to db
 gem 'jdbc-mysql'
-
-gem 'fullcalendar-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

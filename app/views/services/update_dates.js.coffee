@@ -1,0 +1,1 @@
+$("#venue_dates_select").empty().append("<%= escape_javascript(render(:partial => @venues_dates)) %>")

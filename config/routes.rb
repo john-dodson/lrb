@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   get 'services/index'
+  get 'services/update_venues', as: 'update_venues'
+  get 'services/update_dates', as: 'update_dates'
+  get 'services/update_partners', as: 'update_partners'
+  # get 'services/update_caterers', as: 'update_caterers'
+  # get 'services/update_photographers', as: 'update_photographers'
   root 'services#index'
   resources :vendor_types
 

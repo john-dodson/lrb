@@ -12,10 +12,7 @@
           <div class="col-lg-12">
             <div class="form-group">
               <label for="event">Event Type</label>
-              <select class="form-control">
-                <% services_array = Service.all.map { |s| [s.service_type, s.id] } %>
-                <%= options_for_select(services_array) %>
-              </select>
+              <%= select(:service, :service_id, options_for_select(@services.collect { |s| [s.service_type.titleize, s.id] }, 1), {}, { id: 'services_select', :class => "form-control" }) %>
             </div>
           </div>
         </div>
@@ -26,8 +23,7 @@
           <div class="col-lg-12">
             <div class="form-group">
               <label for="venue">Venue</label>
-              <select class="form-control">
-              </select>
+              <%= select(:venue, :venue_id, options_for_select(@venues.collect { |v| [v.name.titleize, v.id] }, 1), {}, { id: 'venue_select', :class => "form-control" }) %>
             </div>
           </div>
         </div>
@@ -37,14 +33,25 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="form-group">
-              <div class= "jflatTimeline">
-                <div class= "timeline-wrap">
-                  <div class= "month-year-bar">
-                    <div class = "year"><a class = "prev"><i class = "fa fa-angle-left"></i></a><%= Date.today.year %><a class = "next"><i class = "fa fa-angle-right"></i></a></div>
-                    <div class = "month"><a class = "prev"><i class = "fa fa-angle-left"></i></a><%= Date::MONTHNAMES[Date.today.month] %><a class = "next"><i class = "fa fa-angle-right"></i></a></div>
-                  </div>
-                </div>
-              </div>
+              <select class= "form-control"></select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <%= select(:vendor_date, :vendor_date, options_for_select(@vendor_dates.collect { |d| [d.date, d.date] }, 1), {}, { id: 'vendor_dates_select', :class => "form-control" }) %>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Select a Florist</legend>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label for="caterer">Florist</label>
+              <%= select(:florist, :florist_id, options_for_select(@florists.collect { |f| [f.name.titleize, f.id] }), {:prompt => "None"}, { id: 'florists_select', :class => "form-control" }) %>
             </div>
           </div>
         </div>
@@ -52,11 +59,10 @@
       <fieldset>
         <legend>Select a Caterer</legend>
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-12">
             <div class="form-group">
               <label for="caterer">Caterer</label>
-              <select class="form-control">
-              </select>
+              <%= select(:caterer, :caterer_id, options_for_select(@caterers.collect { |c| [c.name.titleize, c.id] }), {:prompt => "None"}, { id: 'caterers_select', :class => "form-control" }) %>
             </div>
           </div>
         </div>
@@ -64,11 +70,10 @@
       <fieldset>
         <legend>Select a Photographer</legend>
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-12">
             <div class="form-group">
               <label for="photographer">Photographer</label>
-              <select class="form-control">
-              </select>
+              <%= select(:photographer, :photographer_id, options_for_select(@photographers.collect { |p| [p.name.titleize, p.id] }), {:prompt => "None"}, { id: 'photographers_select', :class => "form-control" }) %>
             </div>
           </div>
         </div>
@@ -83,7 +88,7 @@
           </div>
             <div class="col-lg-12">
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                   <div class="form-group">
                     <label class="sr-only" for="email">Your Email Address</label>
                     <input type="text" class="form-control" id="email" placeholder="Your Email Address">
