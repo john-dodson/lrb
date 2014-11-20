@@ -7,16 +7,18 @@ sfw = '';
 
 $(document).ready ->
     sfw = $("#event_selection").stepFormWizard();
-    sfw.refresh();
 
 $(document).on 'change', '#services_select', (evt) ->
     updateVenues()
+    sfw.refresh();
 
 $(document).on 'change', '#venues_select', (evt) ->
     updateDates()
+    sfw.refresh();
 
 $(document).on 'change', '#venue_dates_select', (evt) ->
     updatePartners()
+    sfw.refresh();
 
 $(window).load ->
     $(".sf-wizard fieldset").mCustomScrollbar({
@@ -60,7 +62,7 @@ updatePartners = ->
       data: {
         service_id: $("#services_select option:selected").val(),
         venue_id: $("#venues_select option:selected").val(),
-        vendor_date: $("#venues_dates_select option:selected").val()
+        vendor_date: $("#vendor_dates_select option:selected").val()
       }
       error: (jqXHR, textStatus, errorThrown) ->
         console.log("AJAX Error: #{textStatus}")

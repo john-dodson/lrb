@@ -5,7 +5,7 @@ class ServicesController < ApplicationController
   def index
     @services = Service.where("service_type != ?", "All")
     @venues = getVenuesFromService(@services.first.id)
-    @vendor_dates = getDatesFromVendor(@venues.first.id, @services.first.id)
+    @vendor_dates = getDatesFromVendor(@venues.first.vendor_id, @services.first.id)
     @florists, @caterers, @photographers = getVendorFromVenue(@venues.first.id, @services.first.id, @vendor_dates.first.date)
   end
 
@@ -17,14 +17,15 @@ class ServicesController < ApplicationController
   end
 
   def update_dates
-    @vendor_dates = getDatesFromVendor(params[:vendor_id], params[:service_id])
+    vendor_id = Venue.find(params[:venue_id]).vendor_id
+    @vendor_dates = getDatesFromVendor(vendor_id, params[:service_id])
     respond_to do |format|
       format.js 
     end
   end
 
   def update_partners
-    @florists, @caterers, @photographers = getVendorFromVenue(params[:venue_id], parmas[:service_id], params[:vendor_date])
+    @florists, @caterers, @photographers = getVendorFromVenue(params[:venue_id], params[:service_id], params[:vendor_date])
     respond_to do |format|
       format.js 
     end
@@ -52,7 +53,7 @@ class ServicesController < ApplicationController
   end
 
   def getDatesFromVendor(vendor_id, service_id)
-    return VendorDate.where("vendor_id = ? AND (service_id = ? OR service_id = ?)", vendor_id, service_id, 1)
+    return VendorDate.where("vendor_id = ? AND (service_id = ? OR service_id = 1)", vendor_id, service_id)
   end
 
   def getVenuesFromService(service_id)
