@@ -18,8 +18,6 @@ gem 'therubyrhino'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-rest-rails'
-gem 'twitter-bootstrap-rails'
-gem 'bootstrap-sass'
 gem 'js-rails'
 gem 'font-awesome-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
