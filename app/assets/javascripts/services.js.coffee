@@ -6,7 +6,7 @@
 sfw = '';
 
 $(document).ready ->
-    sfw = $("#event_selection").stepFormWizard();
+    sfw = $("#event_selection").stepFormWizard(height:'tallest');
 
 $(document).on 'change', '#services_select', (evt) ->
     updateVenues()
