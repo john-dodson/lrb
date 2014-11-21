@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',                              group: :doc
 # Use jdbc-mysql to connect to db
+gem 'rails_serve_static_assets'
+gem 'rails_stdout_logging'
 group :development, :test do
   gem 'jdbc-mysql'
 end
