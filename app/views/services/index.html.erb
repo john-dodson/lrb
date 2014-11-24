@@ -9,10 +9,24 @@
       <fieldset>
         <legend>Select Your Event Type</legend>
         <div class="row">
-          <div class="col-lg-12">
+          <div class="col-lg-6">
             <div class="form-group">
-              <label for="event">Event Type</label>
+              <label for="event">Event Type:</label>
               <%= select(:service, :service_id, options_for_select(@services.collect { |s| [s.service_type.titleize, s.id] }, 1), {}, { id: 'services_select', :class => "form-control" }) %>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="theme">Event Theme:</label>
+              <input type="text" class="form-control" id="theme" placeholder="Your Event Theme">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="guest">Number of Guests:</label>
+              <input type="text" class="form-control" id="guest" placeholder="0">
             </div>
           </div>
         </div>
@@ -20,28 +34,30 @@
       <fieldset>
         <legend>Select a Venue</legend>
         <div class="row">
-          <div class="col-lg-12">
+          <div class="col-lg-6">
             <div class="form-group">
-              <label for="venue">Venue</label>
+              <label for="venue">Venue:</label>
               <%= select(:venue, :venue_id, options_for_select(@venues.collect { |v| [v.name.titleize, v.id] }, 1), {}, { id: 'venues_select', :class => "form-control" }) %>
             </div>
           </div>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Select a Date</legend>
-        <div class="row">
-          <div class="col-lg-12">
+          <div class="col-lg-6">
             <div class="form-group">
-              <select class= "form-control"></select>
+              <label for="date">Event Date:</label>
+              <div id="date" class="box"></div>
             </div>
           </div>
         </div>
         <div class="row">
+          <div class="col-lg-6"></div>
+          <div class="col-lg-6">
+            <label for="any_date">Any Date?</label>
+            <input type="checkbox" name="any_date" value="any"><br>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-lg-12">
-            <div class="form-group">
-              <%= select(:vendor_date, :vendor_date, options_for_select(@vendor_dates.collect { |d| [d.date, d.date] }, 1), {}, { id: 'vendor_dates_select', :class => "form-control" }) %>
-            </div>
+            <label >Venue Description:</label>
+              In publishing and graphic design, lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation, such as web pages, typography, and graphical layout. It is a form of "greeking".
           </div>
         </div>
       </fieldset>
@@ -50,9 +66,15 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="form-group">
-              <label for="caterer">Florist</label>
+              <label for="caterer">Florist:</label>
               <%= select(:florist, :florist_id, options_for_select(@florists.collect { |f| [f.name.titleize, f.id] }), {:prompt => "None"}, { id: 'florists_select', :class => "form-control" }) %>
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <label >Florist Description:</label>
+              In publishing and graphic design, lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation, such as web pages, typography, and graphical layout. It is a form of "greeking".
           </div>
         </div>
       </fieldset>
@@ -61,20 +83,32 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="form-group">
-              <label for="caterer">Caterer</label>
+              <label for="caterer">Caterer:</label>
               <%= select(:caterer, :caterer_id, options_for_select(@caterers.collect { |c| [c.name.titleize, c.id] }), {:prompt => "None"}, { id: 'caterers_select', :class => "form-control" }) %>
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <label >Caterer Description:</label>
+              In publishing and graphic design, lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation, such as web pages, typography, and graphical layout. It is a form of "greeking".
+          </div>
+        </div>
       </fieldset>
       <fieldset>
-        <legend>Select a Photographer</legend>
+        <legend>Select a Photographer:</legend>
         <div class="row">
           <div class="col-lg-12">
             <div class="form-group">
               <label for="photographer">Photographer</label>
               <%= select(:photographer, :photographer_id, options_for_select(@photographers.collect { |p| [p.name.titleize, p.id] }), {:prompt => "None"}, { id: 'photographers_select', :class => "form-control" }) %>
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <label >Photographer Description:</label>
+              In publishing and graphic design, lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation, such as web pages, typography, and graphical layout. It is a form of "greeking".
           </div>
         </div>
       </fieldset>
@@ -90,7 +124,7 @@
               <div class="row">
                 <div class="col-lg-12">
                   <div class="form-group">
-                    <label class="sr-only" for="email">Your Email Address</label>
+                    <label class="sr-only" for="email">Your Email Address:</label>
                     <input type="text" class="form-control" id="email" placeholder="Your Email Address">
                   </div>
                 </div>

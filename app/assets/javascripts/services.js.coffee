@@ -1,12 +1,11 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-#$('.jflatTimeline').jflatTimeline({scroll : '2', width : '700px', scrollingTime : '300'});
-
 sfw = '';
 
 $(document).ready ->
     sfw = $("#event_selection").stepFormWizard(height:'tallest');
+    $('#date').multiDatesPicker();
 
 $(document).on 'change', '#services_select', (evt) ->
     updateVenues()
