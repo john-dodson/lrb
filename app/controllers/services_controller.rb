@@ -6,7 +6,7 @@ class ServicesController < ApplicationController
     @services = Service.where("service_type != ?", "All")
     @venues = getVenuesFromService(@services.first.id)
     @vendor_dates = getDatesFromVendor(@venues.first.vendor_id, @services.first.id)
-    @florists, @caterers, @photographers = getVendorFromVenue(@venues.first.id, @services.first.id, @vendor_dates.first.date)
+    @florists, @caterers, @photographers = getVendorFromVenue(@venues.first.id, @services.first.id, @vendor_dates)
   end
 
   def update_venues
@@ -31,34 +31,35 @@ class ServicesController < ApplicationController
     end
   end
 
-  # def update_caterers
-  #   @caterers = getVendorFromVenue(params[:venue_id], parmas[:service_id], params[:vendor_date])
-  #   respond_to do |format|
-  #     format.js 
-  #   end
-  # end
-
-  # def update_photographers
-  #   @photographers = getVendorFromVenue(params[:venue_id], parmas[:service_id], params[:vendor_date])
-  #   respond_to do |format|
-  #     format.js 
-  #   end
-  # end
-
-  def getVendorFromVenue(venue_id, service_id, vendor_date)
-    florists = Florist.joins("JOIN venue_to_vendors ON venue_to_vendors.vendor_id = florists.vendor_id JOIN vendor_dates on vendor_dates.vendor_id = florists.vendor_id WHERE venue_to_vendors.venue_id = #{venue_id} AND (vendor_dates.service_id = #{service_id} OR vendor_dates.service_id = 1) AND vendor_dates.date = '#{vendor_date}' GROUP BY florists.id")
-    caterers = Caterer.joins("JOIN venue_to_vendors ON venue_to_vendors.vendor_id = caterers.vendor_id JOIN vendor_dates on vendor_dates.vendor_id = caterers.vendor_id WHERE venue_to_vendors.venue_id = #{venue_id} AND (vendor_dates.service_id = #{service_id} OR vendor_dates.service_id = 1) AND vendor_dates.date = '#{vendor_date}' GROUP BY caterers.id")
-    photographers = Photographer.joins("JOIN venue_to_vendors ON venue_to_vendors.vendor_id = photographers.vendor_id JOIN vendor_dates on vendor_dates.vendor_id = photographers.vendor_id WHERE venue_to_vendors.venue_id = #{venue_id} AND (vendor_dates.service_id = #{service_id} OR vendor_dates.service_id = 1) AND vendor_dates.date = '#{vendor_date}' GROUP BY photographers.id")
+  def getVendorFromVenue(venue_id, service_id, vendor_dates)
+    f_dates = formatDates(vendor_dates)
+    florists = Florist.joins("JOIN venue_to_vendors ON venue_to_vendors.vendor_id = florists.vendor_id JOIN vendor_dates on vendor_dates.vendor_id = florists.vendor_id WHERE venue_to_vendors.venue_id = #{venue_id} AND (vendor_dates.service_id = #{service_id} OR vendor_dates.service_id = 1) AND vendor_dates.date in (#{f_dates}) GROUP BY florists.id")
+    caterers = Caterer.joins("JOIN venue_to_vendors ON venue_to_vendors.vendor_id = caterers.vendor_id JOIN vendor_dates on vendor_dates.vendor_id = caterers.vendor_id WHERE venue_to_vendors.venue_id = #{venue_id} AND (vendor_dates.service_id = #{service_id} OR vendor_dates.service_id = 1) AND vendor_dates.date in (#{f_dates}) GROUP BY caterers.id")
+    photographers = Photographer.joins("JOIN venue_to_vendors ON venue_to_vendors.vendor_id = photographers.vendor_id JOIN vendor_dates on vendor_dates.vendor_id = photographers.vendor_id WHERE venue_to_vendors.venue_id = #{venue_id} AND (vendor_dates.service_id = #{service_id} OR vendor_dates.service_id = 1) AND vendor_dates.date in (#{f_dates}) GROUP BY photographers.id")
     return florists, caterers, photographers
   end
 
   def getDatesFromVendor(vendor_id, service_id)
-    return VendorDate.where("vendor_id = ? AND (service_id = ? OR service_id = 1)", vendor_id, service_id)
+    dates = []
+    VendorDate.where("vendor_id = ? AND (service_id = ? OR service_id = 1)", vendor_id, service_id).each { |d| dates << d.date }
+    return dates
+  end
+
+  def formatDates(vendor_dates)
+    formatted_dates= "'#{vendor_dates.join("','")}'"
+    return formatted_dates
   end
 
   def getVenuesFromService(service_id)
     return Venue.joins("JOIN vendor_dates ON vendor_dates.vendor_id = venues.vendor_id WHERE (vendor_dates.service_id = #{service_id} OR vendor_dates.service_id = 1) GROUP BY venues.id")
   end
+
+  def renderDates
+    respond_to do |format|
+      format.json { render json: @vendor_dates }
+    end
+  end
+
 
   # GET /services/1
   # GET /services/1.json

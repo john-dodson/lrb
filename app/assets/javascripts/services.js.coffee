@@ -4,20 +4,27 @@
 sfw = '';
 
 $(document).ready ->
-    sfw = $("#event_selection").stepFormWizard(height:'tallest');
-    $('#date').multiDatesPicker();
+    sfw = $("#event_selection").stepFormWizard(height:'auto');
+    $('#date').multiDatesPicker({ dateFormat: "yy-mm-dd", defaultDate: window.dates[0], beforeShowDay: checkDate, onSelect: updatePartners });
 
 $(document).on 'change', '#services_select', (evt) ->
-    updateVenues()
+    updateVenues();
     sfw.refresh();
+    console.log(window.dates)
 
 $(document).on 'change', '#venues_select', (evt) ->
-    updateDates()
+    updateDates();
     sfw.refresh();
 
-$(document).on 'change', '#venue_dates_select', (evt) ->
-    updatePartners()
+$(document).on 'change', '#date', (evt) ->
+    updatePartners();
     sfw.refresh();
+
+$(document).on 'change', '#any_date', (evt) ->
+    if $('#any_date').is(':checked')
+      $('#date').multiDatesPicker('addDates', dates)
+    else
+      $('#date').multiDatesPicker('removeDates', dates)
 
 $(window).load ->
     $(".sf-wizard fieldset").mCustomScrollbar({
@@ -61,9 +68,23 @@ updatePartners = ->
       data: {
         service_id: $("#services_select option:selected").val(),
         venue_id: $("#venues_select option:selected").val(),
-        vendor_date: $("#vendor_dates_select option:selected").val()
+        vendor_date: getDates();
       }
       error: (jqXHR, textStatus, errorThrown) ->
         console.log("AJAX Error: #{textStatus}")
       success: (data, textStatus, jqXHR) ->
         console.log("Dynamic partners selects OK!")
+
+getDates = ->
+  picked_dates = $('#date').multiDatesPicker('getDates');
+  if picked_dates.length > 0
+    return picked_dates;
+  else
+    return window.dates;
+
+checkDate = (date) ->
+  formatted_date = moment(date).format("YYYY-MM-DD")
+  if $.inArray(formatted_date, window.dates) == -1
+    return [false, "", "unavailable"];
+  else
+    return [true, "", "available"];
